@@ -4,6 +4,7 @@
 #include "color.hh"
 #include "common.hh"
 #include "hittable.hh"
+#include "material.hh"
 #include "ray.hh"
 #include "vec3.hh"
 #include <iostream>
@@ -81,9 +82,12 @@ private:
     }
 
     if (world.hit(r, interval(0.001, infinity), rec)) {
-      vec3 direction = rec.normal + random_unit_vector();
-      return 0.5 * ray_color(ray(rec.p, direction), depth - 1, world);
-      // return 0.5 * (rec.normal + color(1, 1, 1));
+      ray scattered;
+      color attenuation;
+      if (rec.mat->scatter(r, rec, attenuation, scattered)) {
+        return attenuation * ray_color(scattered, depth - 1, world);
+      }
+      return color(0, 0, 0);
     }
 
     vec3 unit_direction = unit_vector(r.direction());
