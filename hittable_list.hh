@@ -3,7 +3,6 @@
 
 #include "hittable.hh"
 
-#include <memory>
 #include <vector>
 
 using std::make_shared;

@@ -1,12 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "color.hh"
-#include "common.hh"
-#include "hittable.hh"
 #include "material.hh"
-#include "ray.hh"
-#include "vec3.hh"
 #include <iostream>
 
 class camera {
